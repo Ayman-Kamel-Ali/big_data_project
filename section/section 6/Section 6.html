@@ -1,0 +1,154 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<strong> => To submit any application to spark use "spark-submit &lt;filename&gt;" in terminal</strong>
+		<br><br><br>
+		=> Why spark? (Figure Spark vs MapReduce.png)
+		<br><br>
+		=> What RDD, partitions?
+		<br>
+		RDD (Resilient distributed dataset) (Figure Spark.png)
+		<br>
+		Is the basic unit of processing (Group of blocks (file) in the memory will call it RDD)
+		<br>
+		File block in RAM is called partition 
+		<br>
+		RDD immutable (can't be changed)
+		<br><br>
+		=> 2 types of operations we can use in Spark:
+		<br>
+		1- Transformation
+		<br>
+		2- Action
+		<br><br>
+		1- Transformation
+		<br>
+		Is used to do changes on data
+		<br>
+		RDD is immutable so transformation will always product new RDDs
+		<br>Transformation will not give/return any results
+		<br><br>
+		2- Action
+		<br>
+		Will return the result of transformation
+		<br>
+		The returning result is a non-RDD values)
+		<br><br>
+		=> We can perform any number of transformation on RDD, where we are storing that Information?
+		<br>
+		Directed acyclic graph (DAG) (Figure DAG.png)
+		<br><br>
+		=> What is Directed acyclic graph (DAG)?
+		<br>
+		Represent and optimize the flow of transformation
+		<br>
+		For every RDD, we are creating a node
+		<br>
+		For every transformation, we create an edge that ends with new RDDs. 
+		<br>
+		The DAG is only executed once we got the actions. (When driver request some data,&nbsp; DAG is executed)
+		<br><br>
+		Transformation is divided to: 
+		<br>1- Narrow Transformation
+		<br>2- Wide Transformation
+		<br><br>
+		1- Narrow Transformation:
+		<br>
+		Transformation that has no shuffling - no new partition (no movement of data)
+		<br><br>
+		2- Wide Transformation: 
+		<br>
+		Transformation that has shuffling - new partition (movement of data)
+		<br><br><br>
+		Spark framework uses a master-slave architecture (driver - workers) (Figure Spark.png)
+		<br>
+		Submit spark program to driver, created RDDs then executing them on workers cluster
+		<br><br>
+		Driver has<br>
+		1- SparkContext
+		<br>
+		2- SparkSession
+		<br><br>
+		1- SparkContext:
+		<br>
+		SparkContext is the entry point for the Spark application and represents the connection to a Spark cluster. 
+		<br>
+		SparkContext provides functionality for creating RDDs (Resilient Distributed Datasets)
+		<br>
+		SparkContext sends tasks to the Executors on the Worker Nodes to run
+		<br>
+		SparkContext provides methods for parallelizing data, defining transformations (e.g., map, filter, reduce), and performing actions (e.g., count, collect, save).
+		<br><br>
+		2- SparkSession:
+		<br>
+		SparkSession was introduced in Spark <a href="#">2.0</a> as a higher-level API, incorporating the capabilities of SparkContext while also providing support for Spark SQL, DataFrame, Dataset, and Structured Streaming.
+		<br><br><br>
+		Spark Types (Figure Spark types.png):
+		<br>
+		1- Spark Core (Low Level API)
+		<br>
+		2- Spark Structure API (High Level API)
+		<br>
+		3- Spark Structure Streaming
+		<br><br><br>
+		=> Spark Structure API:
+		<br>
+		Spark Core gives me a lot of control (low level)
+		<br>
+		When you use Spark Core, you will till the system how to do it
+		<br>
+		Spark Core will do it even if there is a better way (there is no optimization)
+		<br><br>
+		In Structure API, you will just till the system what to do, and it will figure out the way to do it with optimization
+		<br><br>
+		In structure API, you can use:
+		<br>
+		1- DataFrame
+		<br>
+		2- Dataset
+		<br>
+		3- SQL
+		<br><br>
+		1- DataFrame:
+		<br>
+		Gives a schema view of data, data is organized as columns with column name and type info
+		<br>
+		DataFrame is the same as table in relational database
+		<br><br>
+		2- Dataset:
+		<br>
+		A type of Dataframe but is strongly typed, will give me error in compile time (scala and java)
+		<br><br>
+		Batch application (the whole data comes as a batch)
+		<br>
+		1- Core
+		<br>
+		2- Structure API
+		<br><br><br>
+		=> Spark Structure Streaming (Real-time processing):
+		<br>
+		data comes in stream format (continue flow of data)
+		<br>
+		producer: Application that product stream data
+		<br>
+		consumer: Application that listen to stream data
+		<br><br><br>
+		=> Scala Code (run "spark-shell" in terminal)
+		<br>
+		val a = 1 to 10
+		<br>
+		sc
+		<br>
+		val b = sc.parallelize(a)
+		<br>
+		val c = b.map(x=>x+1)
+		<br>
+		val d = c.map(x=>x+3)
+		<br>
+		d.toDebugString
+		<br>
+		d.collect()
+	</body>
+</html>
