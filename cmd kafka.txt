@@ -1,0 +1,47 @@
+open cmd in kafka
+
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+open cmd in kafka
+
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+open cmd in windows
+
+kafka-topics.bat --create --bootstrap-server localhost:9092 --topic mytopic
+
+open cmd in windows
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic mytopic
+
+kafka-console-consumer.bat --topic mytopic --bootstrap-server localhost:9092 --from-beginning
+
+
+
+
+
+
+spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.4,org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.4,org.apache.kafka:kafka-clients:2.8.2 spark-structure-streaming.py
+
+
+spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.4,org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.4,org.apache.kafka:kafka-clients:2.8.2 kafka-producer.py
+
+
+
+
+--------
+
+
+spark-submit --jars spark-sql-kafka-0-10_2.12-3.2.4.jar,spark-streaming-kafka-010-assembly_2.123.2.4.jar,kafka-clients-2.8.2.jar,commons-pool2-2.11.1.jar spark-structure-streaming.py
+
+
+spark-submit --jars spark-sql-kafka-0-10_2.12-3.2.4.jar,spark-streaming-kafka-010-assembly_2.123.2.4.jar,kafka-clients-2.8.2.jar,commons-pool2-2.11.1.jar kafka-producer.py
+
+
+
+
+
+spark-submit --jars spark-sql-kafka-0-10_2.12-3.2.4.jar,spark-streaming-kafka-0-10-assembly_2.12-3.2.4.jar,kafka-clients-2.8.2.jar,commons-pool2-2.11.1.jar spark_consumer.py
+
+
+
